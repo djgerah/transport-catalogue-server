@@ -1,0 +1,141 @@
+{
+  "base_requests": [
+    {
+      "type": "Bus",
+      "name": "37",
+      "stops": [
+        "Копнино",
+        "Зюзино",
+        "Поворот на Полушкино",
+        "Поворот на Зюзино",
+        "Вялки-2",
+        "Платформа Родники",
+        "Овражки",
+        "Саратовское шоссе",
+        "Санаторий",
+        "Пожарная",
+        "МЦД Малаховка",
+        "Поворот на ул. Чайковского",
+        "ул. Некрасова",
+        "Парковая Роща"
+      ],
+      "is_roundtrip": false
+    },
+    {
+      "type": "Stop",
+      "name": "Копнино",
+      "latitude": 55.690431,
+      "longitude": 38.113266,
+      "road_distances": { "Зюзино": 1500 }
+    },
+    {
+      "type": "Stop",
+      "name": "Зюзино",
+      "latitude": 55.682256,
+      "longitude": 38.116579,
+      "road_distances": { "Копнино": 1500, "Поворот на Полушкино": 1200 }
+    },
+    {
+      "type": "Stop",
+      "name": "Поворот на Полушкино",
+      "latitude": 55.679148,
+      "longitude": 38.110804,
+      "road_distances": { "Зюзино": 1200, "Поворот на Зюзино": 800 }
+    },
+    {
+      "type": "Stop",
+      "name": "Поворот на Зюзино",
+      "latitude": 55.656141,
+      "longitude": 38.100587,
+      "road_distances": { "Поворот на Полушкино": 800, "Вялки-2": 1000 }
+    },
+    {
+      "type": "Stop",
+      "name": "Вялки-2",
+      "latitude": 55.654301,
+      "longitude": 38.093509,
+      "road_distances": { "Поворот на Зюзино": 1000, "Платформа Родники": 1500 }
+    },
+    {
+      "type": "Stop",
+      "name": "Платформа Родники",
+      "latitude": 55.656124,
+      "longitude": 38.071597,
+      "road_distances": { "Вялки-2": 1500, "Овражки": 1200 }
+    },
+    {
+      "type": "Stop",
+      "name": "Овражки",
+      "latitude": 55.658625,
+      "longitude": 38.035084,
+      "road_distances": { "Платформа Родники": 1200, "Саратовское шоссе": 1000 }
+    },
+    {
+      "type": "Stop",
+      "name": "Саратовское шоссе",
+      "latitude": 55.661347,
+      "longitude": 38.011089,
+      "road_distances": { "Овражки": 1000, "Санаторий": 400 }
+    },
+    {
+      "type": "Stop",
+      "name": "Санаторий",
+      "latitude": 55.657520,
+      "longitude": 38.011055,
+      "road_distances": { "Саратовское шоссе": 400, "Пожарная": 300 }
+    },
+    {
+      "type": "Stop",
+      "name": "Пожарная",
+      "latitude": 55.654491,
+      "longitude": 38.011085,
+      "road_distances": { "Санаторий": 300, "МЦД Малаховка": 400 }
+    },
+    {
+      "type": "Stop",
+      "name": "МЦД Малаховка",
+      "latitude": 55.646084,
+      "longitude": 38.005671,
+      "road_distances": { "Пожарная": 400, "Поворот на ул. Чайковского": 700 }
+    },
+    {
+      "type": "Stop",
+      "name": "Поворот на ул. Чайковского",
+      "latitude": 55.641199,
+      "longitude": 38.024770,
+      "road_distances": { "МЦД Малаховка": 700, "ул. Некрасова": 500 }
+    },
+    {
+      "type": "Stop",
+      "name": "ул. Некрасова",
+      "latitude": 55.644166,
+      "longitude": 38.032845,
+      "road_distances": { "Поворот на ул. Чайковского": 500, "Парковая Роща": 600 }
+    },
+    {
+      "type": "Stop",
+      "name": "Парковая Роща",
+      "latitude": 55.646193,
+      "longitude": 38.039987,
+      "road_distances": { "ул. Некрасова": 600 }
+    }
+  ],
+  "render_settings": {
+    "width": 1000,
+    "height": 1000,
+    "padding": 30,
+    "stop_radius": 5,
+    "line_width": 14,
+    "bus_label_font_size": 14,
+    "bus_label_offset": [10, -10],
+    "stop_label_font_size": 14,
+    "stop_label_offset": [15, 10],
+    "underlayer_color": [255,255,255,0.85],
+    "underlayer_width": 3,
+    "color_palette": ["green", [255,160,0],"red"]
+  },
+  "routing_settings": {
+    "bus_velocity": 21,
+    "bus_wait_time": 2
+  }
+}
