@@ -58,3 +58,19 @@ void RegisterPutEndpoints(httplib::Server &svr, ServerState &state)
         }
     });
 }
+
+void RegisterPatchEndpoints(httplib::Server &svr, ServerState &state)
+{
+    svr.Patch("/patch", [&state](const httplib::Request &req, httplib::Response &res) {
+        try
+        {
+            HandlePatch(req.body, state);
+            res.set_content("{\"status\":\"ok\"}", "application/json");
+        }
+        catch (const std::exception &e)
+        {
+            res.status = 500;
+            res.set_content(std::string("{\"error\":\"") + e.what() + "\"}", "application/json");
+        }
+    });
+}

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstddef>
 #include <deque>
 #include <map>
 #include <optional>
@@ -37,7 +38,7 @@ struct Hasher
 class TransportCatalogue
 {
     using StopMap = std::unordered_map<std::string_view, const Stop *>;
-    using BusMap = std::unordered_map<std::string_view, const Bus *>;
+    using BusMap = std::unordered_map<std::string_view, Bus *>;
     using HashedStops = std::unordered_set<const Stop *, Hasher>;
     using HashedDistanceBtwStops = std::unordered_map<std::pair<const Stop *, const Stop *>, int, Hasher>;
 
@@ -45,7 +46,8 @@ class TransportCatalogue
     void AddStop(tc::Stop stop);
     const Stop *GetStop(std::string_view stop_name) const;
     void AddBus(tc::Bus bus);
-    const Bus *GetBus(std::string_view bus_name) const;
+    Bus *GetBus(std::string_view bus_name) const;
+    void UpdateBusStops(std::string_view bus_name, std::string_view stop_name, size_t pos);
     std::unordered_set<const Stop *, Hasher> GetUniqueStops(std::string_view bus_number) const;
     const std::map<std::string_view, const Stop *> GetAllStops() const;
     const std::map<std::string_view, const Bus *> GetAllBuses() const;

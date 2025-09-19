@@ -1,5 +1,6 @@
 #include "../include/server_handlers.h"
 #include "../include/json_reader.h"
+#include <cstddef>
 
 void HandleLoad(const std::string &body, ServerState &state)
 {
@@ -99,4 +100,59 @@ void HandlePutBus(const std::string &body, ServerState &state)
     }
 
     state.json_reader->ApplyCommands(*state.catalogue);
+}
+
+void HandlePatch(const std::string &body, ServerState &state)
+{
+    if (!state.catalogue || !state.json_reader)
+    {
+        return;
+    }
+
+    std::istringstream input(body);
+    json::Document doc = json::Load(input);
+    const auto &base_requests = doc.GetRoot().AsDict().at("base_requests").AsArray();
+
+    for (const auto &req : base_requests)
+    {
+        const auto &request = req.AsDict();
+        const auto type = request.at("type").AsString();
+
+        if (type == "Bus")
+        {
+            HandlePatchBus(request, state);
+        }
+    }
+}
+
+void HandlePatchBus(const json::Dict &request, ServerState &state)
+{
+    const auto bus_name = request.at("name").AsString();
+    auto bus = state.catalogue->GetBus(bus_name);
+
+    if (!bus)
+    {
+        return;
+    }
+
+    if (request.count("stops"))
+    {
+        size_t pos = 0;
+
+        if (request.count("position"))
+        {
+            pos = static_cast<size_t>(request.at("position").AsInt());
+        }
+
+        const auto &stops = request.at("stops").AsArray();
+        for (size_t i = 0; i < stops.size(); i++)
+        {
+            state.catalogue->UpdateBusStops(bus_name, stops[i].AsString(), pos + i);
+        }
+    }
+
+    if (request.count("is_roundtrip"))
+    {
+        bus->is_roundtrip = request.at("is_roundtrip").AsBool();
+    }
 }

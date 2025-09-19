@@ -19,6 +19,7 @@ int main()
     RegisterQueryEndpoints(svr, state);
     RegisterMapEndpoints(svr, state);
     RegisterPutEndpoints(svr, state);
+    RegisterPatchEndpoints(svr, state);
 
     RunServer(svr, "0.0.0.0", 8080);
 }

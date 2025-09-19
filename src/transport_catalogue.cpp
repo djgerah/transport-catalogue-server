@@ -40,7 +40,27 @@ void TransportCatalogue::AddBus(tc::Bus bus)
     }
 }
 
-const Bus *TransportCatalogue::GetBus(std::string_view bus_name) const
+void TransportCatalogue::UpdateBusStops(std::string_view bus_name, std::string_view stop_name, size_t pos)
+{
+    auto bus = GetBus(bus_name);
+
+    if (!bus)
+        return;
+
+    if (pos > bus->stops.size())
+    {
+        pos = bus->stops.size();
+    }
+
+    const auto stop = GetStop(stop_name);
+
+    if (stop)
+    {
+        bus->stops.insert(bus->stops.begin() + pos, stop);
+    }
+}
+
+Bus *TransportCatalogue::GetBus(std::string_view bus_name) const
 {
     if (busname_to_bus_.find(bus_name) == busname_to_bus_.end())
     {
